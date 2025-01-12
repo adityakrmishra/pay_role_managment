@@ -1,0 +1,263 @@
++++++++++++++++++++++++++<!DOCTYPE html> 
+
+<html lang="en"> 
+
+  
+
+<head> 
+
+   <meta charset="UTF-8"> 
+
+   <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+
+   <meta name="viewport" content= 
+
+      "width=device-width, initial-scale=1.0"> 
+
+   <style> 
+
+      .container { 
+
+         display: flex; 
+
+         flex-direction: column; 
+
+         width: 25vw; 
+
+         margin-left: 500px; 
+
+         padding: 50px; 
+
+         background-color: aqua; 
+
+      } 
+
+  
+
+      .table { 
+
+         border: 2px solid black; 
+
+      } 
+
+  
+
+      .row { 
+
+         border: 2px solid black; 
+
+      } 
+
+  
+
+      .no-of-notes { 
+
+         border: 2px solid black; 
+
+      } 
+
+  
+
+      .check-btn { 
+
+         margin-top: 35px; 
+
+         padding: 5px; 
+
+      } 
+
+  
+
+      .input-bill { 
+
+         margin-top: 35px; 
+
+         padding: 5px; 
+
+      } 
+
+  
+
+      .cash-given { 
+
+         margin-top: 35px; 
+
+         padding: 5px; 
+
+      } 
+
+   </style> 
+
+</head> 
+
+  
+
+<body> 
+
+   <div class="container"> 
+
+      <header><strong> 
+
+            <center>Pay Role Management</center> 
+
+      </strong></header> 
+
+      <p class="description"> 
+
+         Enter the bill amount and the cash given by the customer  
+
+         and know minimum number of notes to return 
+
+      </p> 
+
+  
+
+      <label for="input-bill"><strong>Enter the bill amount</strong></label> 
+
+      <input class="input-bill" id="bill" /> 
+
+      <label for="cash-given"><strong> Cash Given</strong></label> 
+
+      <input class="cash-given" id="cash" /> 
+
+      <button class="check-btn" id="btn">Check</button> 
+
+      <p id="error"> 
+
+      </p> 
+
+  
+
+      <table class="table"> 
+
+         <caption> 
+
+            <strong>Return Change</strong></caption> 
+
+         <tr class="row"> 
+
+            <th class="row">No of Notes</th> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+            <td class="no-of-notes"></td> 
+
+         </tr> 
+
+         <tr> 
+
+            <th class="row">Notes</th> 
+
+            <td class="row">2000</td> 
+
+            <td class="row">500</td> 
+
+            <td class="row">100</td> 
+
+            <td class="row">20</td> 
+
+            <td class="row">10</td> 
+
+            <td class="row">5</td> 
+
+            <td class="row">1</td> 
+
+         </tr> 
+
+      </table> 
+
+   </div> 
+
+   <script> 
+
+      var inputBill = document.getElementById("bill"); 
+
+      var cashGiven = document.getElementById("cash"); 
+
+      var checkBtn = document.getElementById("btn"); 
+
+      var errMsg = document.getElementById("error"); 
+
+      var noOfNotes = document.querySelectorAll(".no-of-notes"); 
+
+      var notes = [2000, 500, 100, 20, 10, 5, 1]; 
+
+  
+
+      function errorHandle(error) { 
+
+         errMsg.style.display = "block"; 
+
+         errMsg.innerText = error; 
+
+      } 
+
+  
+
+      function hideMessage() { 
+
+         errMsg.style.display = "none"; 
+
+      } 
+
+  
+
+      function clickHandler() { 
+
+         hideMessage(); 
+
+         if (inputBill.value < 0) { 
+
+            errorHandle("Please Enter a positive value"); 
+
+         } else { 
+
+            var remaining = cashGiven.value - inputBill.value; 
+
+            if (remaining < 0) { 
+
+               errorHandle("Give me more"); 
+
+            } else { 
+
+               for (var i = 0; i < notes.length; i++) { 
+
+                  const paisa = Math.trunc(remaining / notes[i]); 
+
+                  remaining %= notes[i]; 
+
+                  noOfNotes[i].innerText = paisa; 
+
+  
+
+               } 
+
+  
+
+            } 
+
+         } 
+
+      } 
+
+  
+
+      checkBtn.addEventListener("click", clickHandler); 
+
+   </script> 
+
+</body> 
+
+  
+
+</html>
